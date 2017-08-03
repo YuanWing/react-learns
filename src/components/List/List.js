@@ -1,40 +1,26 @@
 import React from 'react';
 import NavBar from '../Common/NavBar';
+import { Connect } from '../../service/Connect';
+import './List.css';
 
-const List = () => {
-  const data = [{
-    name: '小白',
-    age: 5
-  }, {
-    name: '大黄',
-    age: 3
-  }];
-
-  const dataDom = [
-    <li key="1">1号</li>,
-    <li key="2">2号</li>
-  ];
-
+const List = (props) => {
   return (
     <div>
       <NavBar title="列表页" />
-      <ul>
+      <ul className="content list">
         {
-          data.map((item, index) => (
+          props.data && props.data.length > 0 &&
+          props.data.map((item, index) => (
             <li key={index}>
-              <strong>名字:</strong>
-              <span>{item.name}</span>
-              <strong>大小:</strong>
-              <span>{item.age}</span>
+              <strong>名称: </strong>
+              <span>{ item.answer }</span>
+              <time>{ item.createTime }</time>
             </li>
           ))
-        }
-        {
-          dataDom
         }
       </ul>
     </div>
   );
 };
 
-export default List;
+export default Connect(List);
